@@ -1,41 +1,41 @@
 #EXTM3U
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV1" group-title="央视",CCTV-1 综合
-CCTV1
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV2" group-title="央视",CCTV-2 财经
-CCTV2
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV3" group-title="央视",CCTV-3 综艺
-CCTV3
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV4" group-title="央视",CCTV-4 中文国际(亚)
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV1.png" tvg-id="1" tvg-name="CCTV-1 综合" group-title="央视",CCTV-1 综合
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221225804/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV2.png" tvg-id="1" tvg-name="CCTV-2 财经" group-title="央视",CCTV-2 财经
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226195/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV3.png" tvg-id="1" tvg-name="CCTV-3 综艺" group-title="央视",CCTV-3 综艺
+http://39.134.24.166/dbiptv.sn.chinamobile.com/PLTV/88888888/224/3221226397/1.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV4.png" tvg-id="1" tvg-name="CCTV-4 中文国际(亚)" group-title="央视",CCTV-4 中文国际(亚)
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226191/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV4EUO.png" tvg-id="1" tvg-name="CCTV-4 中文国际(欧)" group-title="央视",CCTV-4 中文国际(欧)
 CCTV4
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV4" group-title="央视",CCTV-4 中文国际(欧)
-CCTV4
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV4" group-title="央视",CCTV-4 中文国际(美)
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV4AME.png" tvg-id="1" tvg-name="CCTV-4 中文国际(美)" group-title="央视",CCTV-4 中文国际(美)
 CCTV1
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV5" group-title="央视",CCTV-5 体育
-CCTV5
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV5+" group-title="央视",CCTV-5+ 体育赛事
-CCTV5+
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV6" group-title="央视",CCTV-6 电影
-CCTV6
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV7" group-title="央视",CCTV-7 国防军事
-CCTV7
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV8" group-title="央视",CCTV-8 电视剧
-CCTV8
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV9" group-title="央视",CCTV-9 记录
-CCTV9
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV10" group-title="央视",CCTV-10 科教
-CCTV10
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV11" group-title="央视",CCTV-11 戏曲
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV5.png" tvg-id="1" tvg-name="CCTV-5 体育" group-title="央视",CCTV-5 体育
+http://39.134.24.161/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226395/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV5+.png" tvg-id="1" tvg-name="CCTV-5+ 体育赛事" group-title="央视",CCTV-5+ 体育赛事
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221225761/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV6.png" tvg-id="1" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226393/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV7.png" tvg-id="1" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事
+http://39.134.24.166/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226192/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV8.png" tvg-id="1" tvg-name="CCTV-8 电视剧" group-title="央视",CCTV-8 电视剧
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226012/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV9.png" tvg-id="1" tvg-name="CCTV-9 记录" group-title="央视",CCTV-9 记录
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226197/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV10.png" tvg-id="1" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226189/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV11.png" tvg-id="1" tvg-name="CCTV-11 戏曲" group-title="央视",CCTV-11 戏曲
 CCTV11
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV12" group-title="央视",CCTV-12 社会与法
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV12.png" tvg-id="1" tvg-name="CCTV-12 社会与法" group-title="央视",CCTV-12 社会与法
 CCTV12
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV13" group-title="央视",CCTV-13 新闻
-CCTV13
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV14" group-title="央视",CCTV-14 少儿
-CCTV14
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV15" group-title="央视",CCTV-15 音乐
-CCTV15
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV16" group-title="央视",CCTV-16 奥林匹克
-CCTV16
-#EXTINF:-1 tvg-logo="" tvg-id="1" tvg-name="CCTV17" group-title="央视",CCTV-17 农业农村
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV13.png" tvg-id="1" tvg-name="CCTV-13 新闻" group-title="央视",CCTV-13 新闻
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226233/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV14.png" tvg-id="1" tvg-name="CCTV-14 少儿" group-title="央视",CCTV-14 少儿
+http://39.134.24.166/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226193/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV15.png" tvg-id="1" tvg-name="CCTV-15 音乐" group-title="央视",CCTV-15 音乐
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221225785/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV16.png" tvg-id="1" tvg-name="CCTV-16 奥林匹克" group-title="央视",CCTV-16 奥林匹克
+http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226921/index.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/cctv/CCTV17.png" tvg-id="1" tvg-name="CCTV-17 农业农村" group-title="央视",CCTV-17 农业农村
 CCTV17

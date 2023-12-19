@@ -1,84 +1,144 @@
-var ul =  document.getElementById("video-list");
 var url = location.search.split('url=')[1];
-var title = document.title
 if(!url){
-	var li = ul.querySelector('li');
-	url = li.getAttribute('value');
-	document.title = li.getAttribute('title') +' | ' + title	
+	// 默认地址
+	url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u"
 }
 
-changeVideo(url)
+// 校验格式
+var dotIndex = url.lastIndexOf('.');
+var suffixName = url.substr(dotIndex + 1);
+if(!/(m3u8|m3u|txt)$/i.test(suffixName)){
+	alert("暂不支持该格式！");
+	// 关闭窗口
+	// window.opener=null;window.top.open('','_self','');window.close(this);
+}
 
-loadM3u("https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u");
+if(suffixName === 'm3u8'){
+	videoPlay(url)
+}
 
-function loadM3u(m3uPath){
+if(/(m3u|txt)$/i.test(suffixName)){
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", m3uPath, true);
+	xhr.open("GET", url, true);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var content = xhr.responseText;
-			var contents = content.substring(content.indexOf("#EXTINF:")).split("#EXTINF:");
-			for (var i = 0; i < contents.length; i++) {
-				var c = contents[i].replace(/^\s+|\s+$/g,'');
-				if(!c){
-					continue
+			if(content){
+				content = content.trim();
+			}
+			if(!content){
+				return;
+			}
+					
+			if(suffixName === 'txt'){
+				items = content.split("\n");
+			}
+			if(suffixName === 'm3u'){
+				items = content.substring(content.indexOf("#EXTINF:")).split("#EXTINF:");
+			}
+			var title = document.title;
+			var ul =  document.getElementById("video-list");
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(item){
+					item = item.trim();
 				}
-				var m3nuUrl = c.substring(c.lastIndexOf("\n")+1)
-				if(m3nuUrl.substr(0, 4) != "http"){
-					continue
+				if(!item){
+					continue;
 				}
-				var logo = getValue(c,'tvg-logo')
-				var name = getValue(c,'tvg-name')
-				if(!name){
-					name = c.substring(c.lastIndexOf(",")+1,c.lastIndexOf("\n"))
+				if(!item.indexOf('http')){
+					continue;
 				}
-				var title = getValue(c,'group-title')
+				if(suffixName === 'txt'){
+					m3u8 = item.substring(item.indexOf(',')+1);
+					name = item.substring(0, item.indexOf(','));
+				}
+				if(suffixName === 'm3u'){
+					m3u8 = item.substring(item.lastIndexOf("\n")+1);
+					logo = getValueByKey(item,'tvg-logo');
+					name = getValueByKey(item,'tvg-name');
+					if(typeof name === 'undefined' || name === 'undefined'){
+						name = item.substring(item.lastIndexOf(",")+1,item.lastIndexOf("\n"));
+					}
+				}
+				if(m3u8.substr(0, 4) != "http"){
+					continue;
+				}
+				if(typeof logo === 'undefined' || logo === 'undefined'){
+					logo = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/img/logo.png";
+				}
 				var li = document.createElement("li");
-				li.setAttribute("value", m3nuUrl);
+				li.setAttribute("value", m3u8);
 				li.setAttribute("title", name);
 				li.innerHTML = name;
-				li.onclick =  function (){
-					changeVideo(this.getAttribute('value'))
-					history.replaceState(null, null, window.location.href.split('?')[0]);
-					document.title = this.getAttribute('title') +' | ' + title	
-				}
+				li.addEventListener('click',function(e){
+					videoPlay(this.getAttribute('value'));
+					document.title = this.getAttribute('title') +' | ' + title;	
+				})
 				ul.appendChild(li);
+				if(ul.hidden){
+					videoPlay(m3u8);
+					document.title = name +' | ' + title;	
+					ul.hidden = false;
+				}
 			}			
 		}
 	};
 	xhr.send();
 }
 
-function getValue(content, key){
-	content = content.match(new RegExp(`${key}=".*?"`))[0];
-	return content.substring(content.indexOf("\"") + 1,content.lastIndexOf("\""));
+
+
+
+function getValueByKey(content, key){
+	var regex = new RegExp(`${key}=".*?"`);
+	if(!regex.test(key)){
+		return;
+	}
+	content = content.match(regex)[0];
+	if(content){
+		content = content.substring(content.indexOf("\"") + 1, content.lastIndexOf("\""))
+	}
+	if(content){
+		content = content.trim();
+	}
+	return content;
 }
 
-function changeVideo(videoSrc){
-	console.log(videoSrc);
+
+function videoPlay(videoSrc){
 	video = document.getElementById('video');
-	// 检查浏览器是否支持hls
 	if (video.canPlayType('application/vnd.apple.mpegurl')) {
 		video.src = videoSrc;
-	// 如不支持则调用hls.min.js
+		video.addEventListener('loadedmetadata',function() {
+			video.play();
+		});
 	} else if (Hls.isSupported()) { 
 		if(typeof hls !== 'undefined'){
 			hls.destroy();
 		}
 		hls = new Hls();
-		hls.loadSource(videoSrc);
-		hls.attachMedia(video);		
-		hls.on(Hls.Events.MANIFEST_PARSED, function () {
-			 video.play();
+		hls.attachMedia(video);	
+		hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+			hls.loadSource(videoSrc);
+			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+				video.play();
+			});
 		});
-	}
+		hls.on(Hls.Events.ERROR, function (event, data) {
+			if (data.fatal) {
+				switch (data.type) {
+					case Hls.ErrorTypes.NETWORK_ERROR:
+						hls.startLoad();
+						break;
+					case Hls.ErrorTypes.MEDIA_ERROR:
+						hls.recoverMediaError();
+						break;
+					default:
+						hls.destroy();
+						break;
+				}
+			}
+		});	
 }
-
-var list = ul.querySelectorAll('li');
-for (var i = 0; i < list.length; i++) {
-	list[i].onclick =  function (){
-		changeVideo(this.getAttribute('value'))
-		history.replaceState(null, null, window.location.href.split('?')[0]);	
-		document.title = this.getAttribute('title') +' | ' + title
-	}
 }

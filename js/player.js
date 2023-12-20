@@ -223,3 +223,40 @@ function videoPlay(videoSrc){
 		}
 	}	
 })();
+
+window.onkeydown = function(){
+	var code = event.keyCode
+	switch(code){
+		case 13:
+			let input = document.createElement('input');
+			input.value = '选择文件';
+			input.type = 'file';
+			input.accept=".m3u,.m3u8,,txt"
+			input.onchange = event => {
+				let file = event.target.files[0];
+				let file_reader = new FileReader();
+				file_reader.onload = () => {
+					let fc = file_reader.result;
+					console.log(fc);
+				};
+				file_reader.readAsText(file, 'UTF-8');
+			};
+			input.click();
+			break;
+        case 32:
+			if(video.currentTime > 0){
+				 if(video.paused){
+					video.play();
+				 } else {
+					video.pause();
+				 }
+			}
+			break;
+        case 37: 
+			video.currentTime = video.currentTime - 5;
+			break;
+        case 39: 
+			video.currentTime = video.currentTime + 5;
+			break;
+    }    
+}

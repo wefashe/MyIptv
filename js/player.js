@@ -1,8 +1,14 @@
 var url = location.search.split('url=')[1];
 if(!url){
 	// 默认地址
-	url = "/iptv.m3u";
-	// url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u";
+	// 默认地址
+	if(location.href.substr(0, 4) != "http"){
+		// 本地测试地址
+		url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u";
+	} else {
+		// 线上使用地址
+		url = "iptv.m3u";
+	}
 }
 
 // 校验格式

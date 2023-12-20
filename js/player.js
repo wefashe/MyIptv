@@ -228,18 +228,31 @@ window.onkeydown = function(){
 	var code = event.keyCode
 	switch(code){
 		case 13:
+			if (!window.FileReader) {
+				alert("你的浏览器不支持读取本地文件");
+			}
 			let input = document.createElement('input');
 			input.value = '选择文件';
 			input.type = 'file';
 			input.accept=".m3u,.m3u8,,txt"
 			input.onchange = event => {
 				let file = event.target.files[0];
+				var url = URL.createObjectURL(file);  
+				videoPlay(url)
+				URL.revokeObjectURL(url)
+				/*
 				let file_reader = new FileReader();
+				
 				file_reader.onload = () => {
 					let fc = file_reader.result;
 					console.log(fc);
+					videoPlay(fc)
 				};
-				file_reader.readAsText(file, 'UTF-8');
+				if(file_reader){
+					// file_reader.readAsText(file, 'UTF-8');
+					file_reader.readAsDataURL(file);
+					videoPlay(file_reader.result)
+				}*/
 			};
 			input.click();
 			break;

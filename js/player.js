@@ -115,7 +115,9 @@ function videoPlay(videoSrc){
 		});
 	} else if (Hls.isSupported()) { 
 		if(typeof hls !== 'undefined'){
+			video.pause();
 			hls.destroy();
+			hls = null;
 		}
 		hls = new Hls();
 		hls.attachMedia(video);	

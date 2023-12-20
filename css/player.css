@@ -13,3 +13,13 @@ body{
   max-width: 100%;
 }
 */
+
+.video-list li{
+	list-style-type:none;
+}
+
+.video-list li:hover {
+	border-radius:3px;
+	background-color:#e7efff;
+	color: #ffa000;
+}

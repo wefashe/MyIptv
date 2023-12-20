@@ -237,9 +237,9 @@ window.onkeydown = function(){
 			input.accept=".m3u,.m3u8,,txt"
 			input.onchange = event => {
 				let file = event.target.files[0];
-				var url = URL.createObjectURL(file);  
+				var url =  window.URL.createObjectURL(file);  
 				videoPlay(url)
-				URL.revokeObjectURL(url)
+				 window.URL.revokeObjectURL(url)
 				/*
 				let file_reader = new FileReader();
 				

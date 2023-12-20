@@ -1,7 +1,7 @@
 var url = location.search.split('url=')[1];
 if(!url){
 	// 默认地址
-	url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u"
+	url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u";
 }
 
 // 校验格式
@@ -12,12 +12,15 @@ if(!/(m3u8|m3u|txt)$/i.test(suffixName)){
 	// 关闭窗口
 	// window.opener=null;window.top.open('','_self','');window.close(this);
 }
-
+// 加随机数，解决缓存问题
+url = url + "?v=" + Math.random();
 if(suffixName === 'm3u8'){
+	// 播放视频
 	videoPlay(url)
 }
 
 if(/(m3u|txt)$/i.test(suffixName)){
+	// 解析文件，生成视频列表
 	var ul =  document.getElementById("video-list");
 	ajaxHttpRequestFunc(url, ul, (status, ulElement, content) => {
 		if(!status){
@@ -84,11 +87,12 @@ if(/(m3u|txt)$/i.test(suffixName)){
 				if(!status){
 					liElement.className = "lapse";
 				}
-			}, 1000);
+			}, 1500);
 		}
 	});
 }
 
+// 字符串里根据Key获取value
 function getValueByKey(content, key){
 	var regex = new RegExp(`${key}=".*?"`);
 	if(!regex.test(key)){
@@ -104,6 +108,7 @@ function getValueByKey(content, key){
 	return content;
 }
 
+// 发送请求
 function ajaxHttpRequestFunc(URL, element, callback, time = 20000) {
     // 创建XMLHttpRequest对象，即一个用于保存异步调用对象的变量
     let xmlHttpRequest;
@@ -150,6 +155,7 @@ function ajaxHttpRequestFunc(URL, element, callback, time = 20000) {
     xmlHttpRequest.send(null);
 }
 
+// 播放视频
 function videoPlay(videoSrc){
 	video = document.getElementById('video');
 	if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -186,5 +192,28 @@ function videoPlay(videoSrc){
 				}
 			}
 		});	
+	}
 }
-}
+
+//立即执行，js css 加随机数，解决缓存问题
+(function (){
+	var random = Math.random();
+	//处理请求JS文件缓存
+	var element = document.getElementsByTagName("script");
+	for (var i = 0; i < element.length; i++) {
+		if (element[i].src) {
+			if (element[i].src.indexOf('?') > -1) {
+				element[i].src = element[i].src + '&v=' + random;
+			} else {
+				element[i].src = element[i].src + '?v=' + random;
+			}
+		}
+	};
+	//处理CSS文件缓存
+	var link = document.getElementsByTagName("link");
+	for (var i = 0; i < link.length; i++) {
+		if (link[i].href) {
+			link[i].href = link[i].href + '?v=' + random;
+		}
+	}	
+})();

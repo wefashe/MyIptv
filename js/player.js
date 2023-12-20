@@ -1,7 +1,8 @@
 var url = location.search.split('url=')[1];
 if(!url){
 	// 默认地址
-	url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u";
+	url = "/iptv.m3u";
+	// url = "https://cdn.jsdelivr.net/gh/wefashe/MyIptv@main/iptv.m3u";
 }
 
 // 校验格式

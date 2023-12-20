@@ -23,3 +23,8 @@ body{
 	background-color:#e7efff;
 	color: #ffa000;
 }
+
+.lapse {
+	cursor: not-allowed;
+    color: #cfd0d3;
+}

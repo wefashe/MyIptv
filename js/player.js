@@ -12,8 +12,6 @@ if(!/(m3u8|m3u|txt)$/i.test(suffixName)){
 	// 关闭窗口
 	// window.opener=null;window.top.open('','_self','');window.close(this);
 }
-// 加随机数，解决缓存问题
-url = url + "?v=" + Math.random();
 if(suffixName === 'm3u8'){
 	// 播放视频
 	videoPlay(url)
@@ -150,7 +148,8 @@ function ajaxHttpRequestFunc(URL, element, callback, time = 20000) {
 	  console.log('请求超时', URL);
 	};
     // 创建http请求，并指定请求得方法（get）、url（需要校验的URL）以及验证信息
-    xmlHttpRequest.open("GET", URL, true);
+	// 加随机数，解决缓存问题
+    xmlHttpRequest.open("GET", URL + "?v=" + Math.random(), true);
     // 发送请求，因为是get的请求，可以不携带参数
     xmlHttpRequest.send(null);
 }

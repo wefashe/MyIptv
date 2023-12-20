@@ -12,32 +12,38 @@ if(!url){
 }
 
 // 校验格式
-var dotIndex = url.lastIndexOf('.');
-var suffixName = url.substr(dotIndex + 1);
-if(!/(m3u8|m3u|txt)$/i.test(suffixName)){
+var lastName1 = getSuffixName(url);
+if(!/(m3u8|m3u|txt)$/i.test(lastName1)){
 	alert("暂不支持该格式！");
 	// 关闭窗口
 	// window.opener=null;window.top.open('','_self','');window.close(this);
 }
-if(suffixName === 'm3u8'){
+if(lastName1 === 'm3u8'){
 	// 播放视频
 	videoPlay(url)
 }
 
-if(/(m3u|txt)$/i.test(suffixName)){
+if(/(m3u|txt)$/i.test(lastName1)){
 	// 解析文件，生成视频列表
-	var ul =  document.getElementById("video-list");
+	ul =  document.getElementById("video-list");
 	ajaxHttpRequestFunc(url, ul, (status, ulElement, content) => {
 		if(!status){
 			return;
 		}
+		createList(ulElement, content, lastName1);
+	});
+}
+
+// 生成列表
+function createList(ulElement, content, suffixName){
 		if(content){
 			content = content.trim();
 		}
 		if(!content){
 			return;
 		}
-				
+		ulElement.innerHTML = "";
+		ulElement.hidden = true;
 		if(suffixName === 'txt'){
 			items = content.split("\n");
 		}
@@ -94,7 +100,6 @@ if(/(m3u|txt)$/i.test(suffixName)){
 				}
 			}, 1500);
 		}
-	});
 }
 
 // 字符串里根据Key获取value
@@ -111,6 +116,21 @@ function getValueByKey(content, key){
 		content = content.trim();
 	}
 	return content;
+}
+
+// 获取路径的后缀名
+function getSuffixName(path){
+	if(path){
+		path = path.trim();
+	}
+	if(!path){
+		return;
+	}
+	var dotIndex = path.lastIndexOf('.');
+	if(!dotIndex){
+		return;
+	}
+    return path.substr(dotIndex + 1);
 }
 
 // 发送请求
@@ -138,7 +158,7 @@ function ajaxHttpRequestFunc(URL, element, callback, time = 20000) {
                 //此处可以写当前URL无效的一个操作
                 // throw "error:HTTP状态码为:" + xmlHttpRequest.status
                 callback(false, element);
-                console.error("error:HTTP状态码为:" + xmlHttpRequest.status)
+                // console.error("error:HTTP状态码为:" + xmlHttpRequest.status)
                 // return false
             }
         }
@@ -147,12 +167,12 @@ function ajaxHttpRequestFunc(URL, element, callback, time = 20000) {
 	xmlHttpRequest.timeout = time; 
 	xmlHttpRequest.onload = function () {
 	  // 请求完成。在此进行处理。
-	  console.log('请求完成', URL);
+	  // console.log('请求完成', URL);
 	};
 	xmlHttpRequest.ontimeout = function (e) {
 	  // XMLHttpRequest 超时。在此做某事。
 	  callback(false, element);
-	  console.log('请求超时', URL);
+	  // console.log('请求超时', URL);
 	};
     // 创建http请求，并指定请求得方法（get）、url（需要校验的URL）以及验证信息
 	// 加随机数，解决缓存问题
@@ -234,25 +254,22 @@ window.onkeydown = function(){
 			let input = document.createElement('input');
 			input.value = '选择文件';
 			input.type = 'file';
-			input.accept=".m3u,.m3u8,,txt"
+			input.accept=".m3u,.txt"
 			input.onchange = event => {
 				let file = event.target.files[0];
-				var url =  window.URL.createObjectURL(file);  
-				videoPlay(url)
-				 window.URL.revokeObjectURL(url)
-				/*
+				var lastName2 = getSuffixName(file.name);
+				if(!/(m3u|txt)$/i.test(lastName1)){
+					alert("暂不支持该格式！");
+				}				
 				let file_reader = new FileReader();
-				
 				file_reader.onload = () => {
-					let fc = file_reader.result;
-					console.log(fc);
-					videoPlay(fc)
+					let content = file_reader.result;
+					// console.log(content);
+					createList(ul, content, lastName2);
 				};
 				if(file_reader){
-					// file_reader.readAsText(file, 'UTF-8');
-					file_reader.readAsDataURL(file);
-					videoPlay(file_reader.result)
-				}*/
+					file_reader.readAsText(file, 'UTF-8');
+				}
 			};
 			input.click();
 			break;

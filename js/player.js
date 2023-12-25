@@ -291,7 +291,7 @@ window.onkeydown = function(){
     }    
 };
 
-
+/*
 (function(open, send) {
    window.timing = new Map();
    var xhrOpenRequestUrl;  // capture method and url
@@ -332,3 +332,4 @@ window.onkeydown = function(){
    }
 
 })(XMLHttpRequest.prototype.open, XMLHttpRequest.prototype.send)
+*/
